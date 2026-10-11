@@ -33,8 +33,7 @@ export const whatsappConnect = createServerFn({ method: 'POST' })
     if (!origin) throw new Error('عنوان التطبيق غير مسموح');
     const clientId = await ctx(context.userId, context.claims?.email as string | undefined);
     const instanceName = `mf_${clientId.replace(/-/g, '')}`;
-    const { data: existing } = await supabaseAdmin.from('platform_connections').select('id').eq('client_id', clientId).eq('platform', 'whatsapp').maybeSingle();
-    const { data: conn, error } = await supabaseAdmin.from('platform_connections').upsert({ client_id: clientId, user_id: context.userId, platform: 'whatsapp', account_name: 'واتساب', provider_account_id: existing ? undefined as never : '', instance_name: instanceName, status: 'pending', error: null, revoked_at: null }, { onConflict: 'client_id,platform' }).select('id').single();
+        const { data: conn, error } = await supabaseAdmin.from('platform_connections').upsert({ client_id: clientId, user_id: context.userId, platform: 'whatsapp', account_name: 'واتساب', provider_account_id: instanceName, instance_name: instanceName, status: 'pending', error: null, revoked_at: null }, { onConflict: 'client_id,platform' }).select('id').single();
     if (error || !conn) throw new Error('تعذر حفظ الاتصال');
     const { data: sec } = await supabaseAdmin.from('connection_secrets').select('webhook_token').eq('connection_id', conn.id).maybeSingle();
     const token = sec?.webhook_token ?? randomToken();
