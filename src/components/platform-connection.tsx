@@ -88,19 +88,7 @@ export function PlatformConnection({ platform }: { platform: SocialPlatform }) {
           ))}
         </ul>
       </section>
-      {!user ? <Button asChild variant="dashboard" className="platform-continue-button"><Link to="/auth">سجل الدخول لربط حسابك</Link></Button> : <Button
-        variant="dashboard"
-        className="platform-continue-button"
-        onClick={() => setShowConnectionNotice(true)}
-      >
-        <SocialIcon platform={platform} />
-        <span>متابعة عبر {label}</span>
-      </Button>}
-      {showConnectionNotice && (
-        <p role="status" className="platform-action-notice">
-          يلزم إعداد {platform === 'whatsapp' ? 'خدمة واتساب للأعمال' : 'تطبيق Meta للأعمال'} قبل تفعيل الربط مع {label}. لم يتم ربط حسابك بعد.
-        </p>
-      )}
+      {!user ? <Button asChild variant="dashboard" className="platform-continue-button"><Link to="/auth">سجل الدخول لربط حسابك</Link></Button> : <ConnectionPanel platform={platform} label={label} />}
       {connectionError && <p role="alert" className="platform-action-notice">{connectionError}</p>}
       <div className="platform-or">
         <span>أو</span>
