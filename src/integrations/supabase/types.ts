@@ -143,6 +143,45 @@ export type Database = {
           },
         ]
       }
+      connection_secrets: {
+        Row: {
+          access_token: string | null
+          client_id: string
+          connection_id: string
+          updated_at: string
+          webhook_token: string | null
+        }
+        Insert: {
+          access_token?: string | null
+          client_id: string
+          connection_id: string
+          updated_at?: string
+          webhook_token?: string | null
+        }
+        Update: {
+          access_token?: string | null
+          client_id?: string
+          connection_id?: string
+          updated_at?: string
+          webhook_token?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "connection_secrets_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "connection_secrets_connection_id_fkey"
+            columns: ["connection_id"]
+            isOneToOne: true
+            referencedRelation: "platform_connections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contacts: {
         Row: {
           avatar_url: string | null
@@ -572,6 +611,44 @@ export type Database = {
             columns: ["sender_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      oauth_states: {
+        Row: {
+          client_id: string
+          created_at: string
+          platform: Database["public"]["Enums"]["platform_name"]
+          redirect_uri: string
+          return_origin: string
+          state: string
+          user_id: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          platform: Database["public"]["Enums"]["platform_name"]
+          redirect_uri: string
+          return_origin: string
+          state: string
+          user_id: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          platform?: Database["public"]["Enums"]["platform_name"]
+          redirect_uri?: string
+          return_origin?: string
+          state?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "oauth_states_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
             referencedColumns: ["id"]
           },
         ]
