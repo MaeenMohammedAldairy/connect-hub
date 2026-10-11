@@ -41,7 +41,7 @@ function Review() {
     const chosen = items.filter(i => selected.includes(i.id));
     if (approve && chosen.some(i => !i.platforms.length || i.platforms.some(p => !canManagePlatform(p as PlatformName, connections)))) { setNotice('اختر منصة مرتبطة لكل منشور قبل الاعتماد.'); return; }
     setBusy(true); setNotice('');
-    const rows = chosen.map(i => ({ ...i, id: i.id.startsWith('sample-') ? crypto.randomUUID() : i.id, user_id: user.id, status: approve ? 'approved' : 'draft', updated_at: new Date().toISOString() }));
+    const rows = chosen.map(i => ({ ...i, id: i.id.startsWith('sample-') ? crypto.randomUUID() : i.id, user_id: user.id, status: approve ? ('approved' as const) : ('draft' as const), updated_at: new Date().toISOString() }));
     const { data, error } = await supabase.from('content_reviews').upsert(rows).select();
     if (error) setNotice('تعذر حفظ المحتوى. حاول مجددًا.');
     else if (data) {
