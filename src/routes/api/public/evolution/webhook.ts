@@ -34,7 +34,7 @@ export const Route = createFileRoute('/api/public/evolution/webhook')({
               const msg = d.message ?? {};
               const text = msg.conversation ?? msg.extendedTextMessage?.text ?? msg.imageMessage?.caption ?? msg.videoMessage?.caption ?? null;
               const type = msg.imageMessage ? 'image' : msg.audioMessage ? 'audio' : msg.videoMessage ? 'video' : msg.documentMessage ? 'document' : 'text';
-              const phone = jid.split('@')[0];
+              const phone = jid.split('@')[0] ?? null;
               await ingestMessage({ clientId: conn.client_id, platform: 'whatsapp', threadId: jid, externalId: d.key.id, name: d.key.fromMe ? null : d.pushName, phone, direction: d.key.fromMe ? 'outbound' : 'inbound', body: text, contentType: type, sentAt: new Date(Number(d.messageTimestamp ?? Date.now() / 1000) * 1000), payload: d });
             }
           }

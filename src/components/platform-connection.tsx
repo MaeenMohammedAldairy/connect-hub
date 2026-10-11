@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { MenaFlowMark } from "@/components/menaflow-brand";
 import { SocialIcon, type SocialPlatform } from "@/components/social-icon";
 import { useAccount } from '@/components/account-provider';
+import { ConnectionPanel } from '@/components/connection-panel';
 import instagramPhoneAsset from "@/assets/instagram-phone.jpg.asset.json";
 const instagramPhone = instagramPhoneAsset.url;
 import facebookPhoneAsset from "@/assets/facebook-phone.jpg.asset.json";
