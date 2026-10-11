@@ -30,6 +30,9 @@ import { Route as ManagePlatformRouteImport } from './routes/manage.$platform'
 import { Route as OrdersIdRouteImport } from './routes/orders_.$id'
 import { Route as PostsIdRouteImport } from './routes/posts_.$id'
 import { Route as ProductsIdRouteImport } from './routes/products_.$id'
+import { Route as ApiPublicEvolutionWebhookRouteImport } from './routes/api/public/evolution/webhook'
+import { Route as ApiPublicMetaCallbackRouteImport } from './routes/api/public/meta/callback'
+import { Route as ApiPublicMetaWebhookRouteImport } from './routes/api/public/meta/webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -136,6 +139,22 @@ const ProductsIdRoute = ProductsIdRouteImport.update({
   path: '/products/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicEvolutionWebhookRoute =
+  ApiPublicEvolutionWebhookRouteImport.update({
+    id: '/api/public/evolution/webhook',
+    path: '/api/public/evolution/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicMetaCallbackRoute = ApiPublicMetaCallbackRouteImport.update({
+  id: '/api/public/meta/callback',
+  path: '/api/public/meta/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicMetaWebhookRoute = ApiPublicMetaWebhookRouteImport.update({
+  id: '/api/public/meta/webhook',
+  path: '/api/public/meta/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -159,6 +178,9 @@ export interface FileRoutesByFullPath {
   '/orders/$id': typeof OrdersIdRoute
   '/posts/$id': typeof PostsIdRoute
   '/products/$id': typeof ProductsIdRoute
+  '/api/public/evolution/webhook': typeof ApiPublicEvolutionWebhookRoute
+  '/api/public/meta/callback': typeof ApiPublicMetaCallbackRoute
+  '/api/public/meta/webhook': typeof ApiPublicMetaWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -182,6 +204,9 @@ export interface FileRoutesByTo {
   '/orders/$id': typeof OrdersIdRoute
   '/posts/$id': typeof PostsIdRoute
   '/products/$id': typeof ProductsIdRoute
+  '/api/public/evolution/webhook': typeof ApiPublicEvolutionWebhookRoute
+  '/api/public/meta/callback': typeof ApiPublicMetaCallbackRoute
+  '/api/public/meta/webhook': typeof ApiPublicMetaWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -206,6 +231,9 @@ export interface FileRoutesById {
   '/orders_/$id': typeof OrdersIdRoute
   '/posts_/$id': typeof PostsIdRoute
   '/products_/$id': typeof ProductsIdRoute
+  '/api/public/evolution/webhook': typeof ApiPublicEvolutionWebhookRoute
+  '/api/public/meta/callback': typeof ApiPublicMetaCallbackRoute
+  '/api/public/meta/webhook': typeof ApiPublicMetaWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -231,6 +259,9 @@ export interface FileRouteTypes {
     | '/orders/$id'
     | '/posts/$id'
     | '/products/$id'
+    | '/api/public/evolution/webhook'
+    | '/api/public/meta/callback'
+    | '/api/public/meta/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -254,6 +285,9 @@ export interface FileRouteTypes {
     | '/orders/$id'
     | '/posts/$id'
     | '/products/$id'
+    | '/api/public/evolution/webhook'
+    | '/api/public/meta/callback'
+    | '/api/public/meta/webhook'
   id:
     | '__root__'
     | '/'
@@ -277,6 +311,9 @@ export interface FileRouteTypes {
     | '/orders_/$id'
     | '/posts_/$id'
     | '/products_/$id'
+    | '/api/public/evolution/webhook'
+    | '/api/public/meta/callback'
+    | '/api/public/meta/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -301,6 +338,9 @@ export interface RootRouteChildren {
   OrdersIdRoute: typeof OrdersIdRoute
   PostsIdRoute: typeof PostsIdRoute
   ProductsIdRoute: typeof ProductsIdRoute
+  ApiPublicEvolutionWebhookRoute: typeof ApiPublicEvolutionWebhookRoute
+  ApiPublicMetaCallbackRoute: typeof ApiPublicMetaCallbackRoute
+  ApiPublicMetaWebhookRoute: typeof ApiPublicMetaWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -452,6 +492,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/evolution/webhook': {
+      id: '/api/public/evolution/webhook'
+      path: '/api/public/evolution/webhook'
+      fullPath: '/api/public/evolution/webhook'
+      preLoaderRoute: typeof ApiPublicEvolutionWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/meta/callback': {
+      id: '/api/public/meta/callback'
+      path: '/api/public/meta/callback'
+      fullPath: '/api/public/meta/callback'
+      preLoaderRoute: typeof ApiPublicMetaCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/meta/webhook': {
+      id: '/api/public/meta/webhook'
+      path: '/api/public/meta/webhook'
+      fullPath: '/api/public/meta/webhook'
+      preLoaderRoute: typeof ApiPublicMetaWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -477,6 +538,9 @@ const rootRouteChildren: RootRouteChildren = {
   OrdersIdRoute: OrdersIdRoute,
   PostsIdRoute: PostsIdRoute,
   ProductsIdRoute: ProductsIdRoute,
+  ApiPublicEvolutionWebhookRoute: ApiPublicEvolutionWebhookRoute,
+  ApiPublicMetaCallbackRoute: ApiPublicMetaCallbackRoute,
+  ApiPublicMetaWebhookRoute: ApiPublicMetaWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
